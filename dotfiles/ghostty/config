@@ -1,0 +1,9 @@
+font-family = "MonaspiceNe Nerd Font Mono"
+window-decoration = false
+theme = catppuccin-mocha
+background-opacity = 0.9
+background-blur-radius = 15 
+font-size = 18 
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind
