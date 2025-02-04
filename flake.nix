@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
+    
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -42,6 +42,7 @@
           "Okta Verify" = 490179405;
         };
       };
+
       fonts.packages = with pkgs; [
         nerd-fonts.monaspace
       ];
@@ -62,7 +63,7 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
-      users.users.davish = {
+      users.users.brian = {
           name = "brian";
           home = "/Users/brian";
       };      
@@ -71,7 +72,7 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
 

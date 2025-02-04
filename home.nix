@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.stateVersion = "24.11"; # Please read the comment before changing.
@@ -21,10 +21,10 @@
       set fish_greeting # Disable greeting
       '';
     shellAliases = {
-        ls = "eza";
-        lg = "lazygit";
-      };
+      ls = "eza";
+      lg = "lazygit";
     };
+  };
   # Let Home Manager install and manage itself.
   programs.zoxide.enable = true;
   programs.starship.enable = true;
