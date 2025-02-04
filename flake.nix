@@ -39,8 +39,8 @@
         onActivation.cleanup = "zap";
 
         masApps = {
-          "Okta Verify" = 490179405
-        }
+          "Okta Verify" = 490179405;
+        };
       };
       fonts.packages = with pkgs; [
         nerd-fonts.monaspace
@@ -71,22 +71,24 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
 
-        nix-homebrew.darwinModules.nix-homebrew = {
-          enable = true;
-          enableRosetta = true;
-          user = "brian";
-        };
-
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = "brian";
+          };
+        }
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.brian = import ./home.nix;
-        };
+        }
       ];  
     };
   };
