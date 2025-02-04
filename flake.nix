@@ -23,6 +23,9 @@
         fish
         git
         starship
+        eza
+        lazygit
+        gh
       ];
 
       homebrew = {
