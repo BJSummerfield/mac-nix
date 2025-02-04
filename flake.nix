@@ -22,10 +22,7 @@
         zoxide
         fish
         git
-        lazygit
         starship
-        eza
-        gh
       ];
 
       homebrew = {
