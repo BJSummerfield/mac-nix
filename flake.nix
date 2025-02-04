@@ -2,7 +2,7 @@
   description = "Example nix-darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     
@@ -24,12 +24,14 @@
         git
         lazygit
         starship
-        ghostty
+        eza
+        gh
       ];
 
       homebrew = {
         enable = true;
         casks = [
+          "ghostty"
           "1password"
           "keybase"
           "microsoft-teams"
@@ -63,9 +65,12 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
+      users.knownUsers = [ "brian" ];
       users.users.brian = {
           name = "brian";
           home = "/Users/brian";
+          uid = 501;
+          shell = pkgs.fish;
       };      
     };
   in
