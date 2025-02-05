@@ -28,7 +28,7 @@
 
   programs.git = {
     enable = true;
-    userName = "bjsummerfield";
+    userName = "BJSummerfield";
     userEmail = "brianjsummerfield@gmail.com";
   };
 
