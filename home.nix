@@ -19,6 +19,7 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      source /Users/brian/.config/op/plugins.sh
     '';
     shellAliases = {
       ls = "eza";
@@ -30,6 +31,15 @@
     enable = true;
     userName = "BJSummerfield";
     userEmail = "brianjsummerfield@gmail.com";
+    extraConfig =
+      {
+        user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP2G3biYuL3iFvhAXYNuVzvRpAQMmFFLek3KFZV4PfDu";
+        gpg = {
+          ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          format = "ssh";
+        };
+        commit.gpgSign = true;
+      };
   };
 
   programs.helix = {

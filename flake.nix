@@ -43,7 +43,11 @@
 
           masApps = {
             "Okta Verify" = 490179405;
+            "Xcode" = 497799835;
           };
+          taps = [
+            "nikitabobko/tap"
+          ];
         };
 
         fonts.packages = with pkgs; [
@@ -55,6 +59,14 @@
 
         # Enable alternative shell support in nix-darwin.
         programs.fish.enable = true;
+
+        system.defaults.dock = {
+          autohide = true;
+          autohide-delay = 0.0;
+          show-recents = false;
+          autohide-time-modifier = 0.0;
+          tilesize = 1;
+        };
 
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
