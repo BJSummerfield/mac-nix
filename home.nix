@@ -11,9 +11,7 @@
     ".config/aerospace".source = dotfiles/aerospace;
   };
 
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
+  home.sessionVariables = { };
 
   programs.fish = {
     enable = true;
@@ -40,6 +38,29 @@
         };
         commit.gpgSign = true;
       };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui = {
+        language = "en";
+        theme = {
+          activeBorderColor = [
+            "#f5e0dc"
+            "bold"
+          ];
+          inactiveBorderColor = [ "#a6adc8" ];
+          optionsTextColor = [ "#89b4fa" ];
+          selectedLineBgColor = [ "#313244" ];
+          cherryPickedCommitBgColor = [ "#45475a" ];
+          cherryPickedCommitFgColor = [ "#f5e0dc" ];
+          unstagedChangesColor = [ "#f38ba8" ];
+          defaultFgColor = [ "#cdd6f4" ];
+          searchingActiveBorderColor = [ "#f9e2af" ];
+        };
+      };
+    };
   };
 
   programs.helix = {
@@ -74,6 +95,13 @@
           };
           auto-format = true;
         }
+        {
+          name = "rust";
+          formatter = {
+            command = "rustfmt";
+          };
+          auto-format = true;
+        }
       ];
     };
     themes = {
@@ -83,7 +111,11 @@
       };
     };
     extraPackages = with pkgs; [
-      rust-analyzer
+      # rust-analyzer
+      # rustfmt
+      # rustc
+      # clippy
+      # cargo
       nodePackages.prettier
       nodePackages.typescript-language-server
       typescript
@@ -99,3 +131,4 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
+
