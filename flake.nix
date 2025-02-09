@@ -20,11 +20,6 @@
           _1password-cli
           helix
           zoxide
-          cargo
-          rustc
-          clippy
-          rust-analyzer
-          rustlings
           fish
           git
           starship

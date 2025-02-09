@@ -111,11 +111,6 @@
       };
     };
     extraPackages = with pkgs; [
-      # rust-analyzer
-      # rustfmt
-      # rustc
-      # clippy
-      # cargo
       nodePackages.prettier
       nodePackages.typescript-language-server
       typescript
