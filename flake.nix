@@ -11,10 +11,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    #language server for helix
+    bicep-langserver.url = "path:./bicep-langserver";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, bicep-langserver, nix-homebrew }:
     let
+      system = "aarch64-darwin";
       configuration = { pkgs, ... }: {
         environment.systemPackages = with pkgs; [
           _1password-cli
@@ -33,6 +37,7 @@
         homebrew = {
           enable = true;
           casks = [
+            "docker"
             "ghostty"
             "1password"
             "keybase"
@@ -102,6 +107,15 @@
               enableRosetta = true;
               user = "brian";
             };
+          }
+          # this is an overlay that injects the bicep package into packages for home-manager
+          {
+            # Inject your overlay globally
+            nixpkgs.overlays = [
+              (final: prev: {
+                bicep-langserver = bicep-langserver.packages.${system}.bicep-langserver;
+              })
+            ];
           }
           home-manager.darwinModules.home-manager
           {

@@ -37,6 +37,7 @@
           format = "ssh";
         };
         commit.gpgSign = true;
+        init.defaultBranch = "main";
       };
   };
 
@@ -84,8 +85,18 @@
       };
     };
     languages = {
-      language-server.rust-analyzer.config.check = {
-        command = "clippy";
+      language-server = {
+        rust-analyzer.config.check = {
+          command = "clippy";
+        };
+        biome = {
+          command = "biome";
+          args = [ "lsp-proxy" ];
+        };
+        typescript-language-server.config.tsserver = {
+          path = "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
+        };
+
       };
       language = [
         {
@@ -102,6 +113,79 @@
           };
           auto-format = true;
         }
+        {
+          name = "javascript";
+          language-servers = [
+            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            "biome"
+          ];
+          auto-format = true;
+        }
+        {
+          name = "json";
+          language-servers = [
+            { name = "vscode-json-language-server"; except-features = [ "format" ]; }
+            "biome"
+          ];
+          formatter = {
+            command = "biome";
+            args = [ "format" "--indent-style" "space" "--stdin-file-path" "file.json" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "jsx";
+          language-servers = [
+            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            "biome"
+          ];
+          formatter = {
+            command = "biome";
+            args = [ "format" "--indent-style" "space" "--stdin-file-path" "file.jsx" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "tsx";
+          language-servers = [
+            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            "biome"
+          ];
+          formatter = {
+            command = "biome";
+            args = [ "format" "--indent-style" "space" "--stdin-file-path" "file.tsx" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "graphql";
+          formatter = {
+            command = "prettier";
+            args = [ "--stdin-filepath" "file.graphql" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "typescript";
+          language-servers = [
+            { name = "typescript-language-server"; except-features = [ "format" ]; }
+            "biome"
+          ];
+          formatter = {
+            command = "biome";
+            args = [ "format" "--indent-style" "space" "--stdin-file-path" "file.ts" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "yaml";
+          language-servers = [ "yaml-language-server" ];
+          formatter = {
+            command = "prettier";
+            args = [ "--stdin-filepath" "file.yaml" ];
+          };
+          auto-format = true;
+        }
       ];
     };
     themes = {
@@ -111,13 +195,35 @@
       };
     };
     extraPackages = with pkgs; [
+      #bicep
+      bicep-langserver
+      dotnetCorePackages.dotnet_8.sdk
+
+      #rust
+      rustc
+      rust-analyzer
+      clippy
+      cargo
+      rustfmt
+
+      #node
+      nodePackages.graphql-language-service-cli
+      biome
       nodePackages.prettier
       nodePackages.typescript-language-server
       typescript
+
+      #markdown
       marksman
+
+      #nix
       nil
       nixd
       nixpkgs-fmt
+
+      #yaml
+      yaml-language-server
+
     ];
   };
   programs.zoxide.enable = true;
