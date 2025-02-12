@@ -15,25 +15,27 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew }:
     let
-      system = "aarch64-darwin";
-      customOverlays = import ./overlays;
-      # pkgs = import nixpkgs {
-      #   system = system;
-      #   overlays = customOverlays;
-      #   # config = {
-      #   #   allowUnfree = true;
-      #   # };
-      # };
-      configuration = import ./config {
-        pkgs = import nixpkgs;
-        self = self;
+      # system = "aarch64-darwin";
+      pkgs = import nixpkgs {
+        system = "aarch64-darwin";
+        config = {
+          allowUnfree = true;
+
+        };
       };
+
+      configuration = import ./config
+        {
+          pkgs = pkgs;
+          self = self;
+        };
     in
     {
       darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
         modules = [
+          #config
           configuration
-
+          # homebrew 
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
@@ -43,8 +45,12 @@
             };
           }
 
-          { nixpkgs.overlays = customOverlays; }
+          #overlays
+          {
+            nixpkgs.overlays = import ./overlays;
+          }
 
+          # home-manager
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

@@ -3,7 +3,6 @@
   homebrew = {
     enable = true;
     casks = [
-      "docker"
       "ghostty"
       "1password"
       "keybase"

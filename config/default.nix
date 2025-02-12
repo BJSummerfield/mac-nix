@@ -4,5 +4,4 @@ let
   homebrewConfig = import ./homebrew.nix { };
   packagesConfig = import ./packages.nix { inherit pkgs; };
 in
-# // operator merges the attribute set, combining them
 systemConfig // homebrewConfig // packagesConfig
