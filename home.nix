@@ -186,6 +186,13 @@
           };
           auto-format = true;
         }
+        {
+          name = "toml";
+          formatter = {
+            command = "taplo";
+            args = [ "fmt" "-" ];
+          };
+        }
       ];
     };
     themes = {
@@ -224,6 +231,8 @@
       #yaml
       yaml-language-server
 
+      #toml
+      taplo
     ];
   };
   programs.zoxide.enable = true;
