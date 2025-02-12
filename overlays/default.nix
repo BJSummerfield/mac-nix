@@ -1,0 +1,5 @@
+[
+  (import ./bicep-lsp.nix)
+]
+
+
