@@ -17,83 +17,19 @@
     let
       system = "aarch64-darwin";
       customOverlays = import ./overlays;
-      configuration = { pkgs, ... }: {
-        environment.systemPackages = with pkgs; [
-          _1password-cli
-          helix
-          zoxide
-          fish
-          git
-          starship
-          eza
-          lazygit
-          gh
-        ];
-
-        nixpkgs.config.allowUnfree = true;
-
-        homebrew = {
-          enable = true;
-          casks = [
-            "docker"
-            "ghostty"
-            "1password"
-            "keybase"
-            "microsoft-teams"
-            "firefox@developer-edition"
-            "aerospace"
-          ];
-          onActivation.cleanup = "zap";
-
-          masApps = {
-            "Okta Verify" = 490179405;
-            "Xcode" = 497799835;
-          };
-          taps = [
-            "nikitabobko/tap"
-          ];
-        };
-
-        fonts.packages = with pkgs; [
-          nerd-fonts.monaspace
-        ];
-
-        # Necessary for using flakes on this system.
-        nix.settings.experimental-features = "nix-command flakes";
-
-        # Enable alternative shell support in nix-darwin.
-        programs.fish.enable = true;
-
-        system.defaults.dock = {
-          autohide = true;
-          autohide-delay = 0.0;
-          show-recents = false;
-          autohide-time-modifier = 0.0;
-          tilesize = 1;
-        };
-
-        # Set Git commit hash for darwin-version.
-        system.configurationRevision = self.rev or self.dirtyRev or null;
-
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        system.stateVersion = 6;
-
-        # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "aarch64-darwin";
-
-        users.knownUsers = [ "brian" ];
-        users.users.brian = {
-          name = "brian";
-          home = "/Users/brian";
-          uid = 501;
-          shell = pkgs.fish;
-        };
+      # pkgs = import nixpkgs {
+      #   system = system;
+      #   overlays = customOverlays;
+      #   # config = {
+      #   #   allowUnfree = true;
+      #   # };
+      # };
+      configuration = import ./config {
+        pkgs = import nixpkgs;
+        self = self;
       };
     in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#simple
       darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
@@ -106,10 +42,9 @@
               user = "brian";
             };
           }
-          # this is an overlay that injects the bicep package into packages for home-manager
-          {
-            nixpkgs.overlays = customOverlays;
-          }
+
+          { nixpkgs.overlays = customOverlays; }
+
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
