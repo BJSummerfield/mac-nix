@@ -13,7 +13,7 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
     #language server for helix
-    bicep-langserver.url = "path:./bicep-langserver";
+    bicep-langserver.url = "path:bicep-langserver";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, bicep-langserver, nix-homebrew }:
