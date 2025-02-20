@@ -18,10 +18,23 @@
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
       source /Users/brian/.config/op/plugins.sh
+      direnv hook fish | source
     '';
     shellAliases = {
       ls = "eza";
       lg = "lazygit";
+    };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
     };
   };
 
@@ -109,7 +122,7 @@
         {
           name = "rust";
           formatter = {
-            command = "rustfmt";
+            command = "cargo fmt";
           };
           auto-format = true;
         }
@@ -157,14 +170,14 @@
           };
           auto-format = true;
         }
-        {
-          name = "graphql";
-          formatter = {
-            command = "prettier";
-            args = [ "--stdin-filepath" "file.graphql" ];
-          };
-          auto-format = true;
-        }
+        # {
+        #   name = "graphql";
+        #   formatter = {
+        #     command = "prettier";
+        #     args = [ "--stdin-filepath" "file.graphql" ];
+        #   };
+        #   auto-format = true;
+        # }
         {
           name = "typescript";
           language-servers = [
@@ -192,6 +205,7 @@
             command = "taplo";
             args = [ "fmt" "-" ];
           };
+          auto-format = true;
         }
       ];
     };
@@ -214,7 +228,7 @@
       rustfmt
 
       #node
-      nodePackages.graphql-language-service-cli
+      # nodePackages.graphql-language-service-cli
       biome
       nodePackages.prettier
       nodePackages.typescript-language-server
