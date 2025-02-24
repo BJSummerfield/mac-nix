@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    taplo
+    ffmpeg
     _1password-cli
     helix
     zoxide
