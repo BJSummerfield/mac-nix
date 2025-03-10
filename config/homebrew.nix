@@ -3,6 +3,7 @@
   homebrew = {
     enable = true;
     casks = [
+      "zoom"
       "docker"
       "ghostty"
       "1password"
@@ -16,6 +17,7 @@
     masApps = {
       "Okta Verify" = 490179405;
       "Xcode" = 497799835;
+      "Company Portal" = 719171358;
     };
     taps = [ "nikitabobko/tap" ];
   };
