@@ -185,13 +185,10 @@
         # }
         {
           name = "typescript";
-          language-servers = [
-            { name = "typescript-language-server"; except-features = [ "format" ]; }
-            "biome"
-          ];
+          language-servers = [ "typescript-language-server" ];
           formatter = {
-            command = "biome";
-            args = [ "format" "--indent-style" "space" "--stdin-file-path" "file.ts" ];
+            command = "prettier";
+            args = [ "--parser" "typescript" ];
           };
           auto-format = true;
         }
