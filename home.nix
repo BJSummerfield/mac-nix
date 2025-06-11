@@ -22,7 +22,7 @@
         hash = "sha256-m8gEIeyZPQ43jj2cus+Ks1K9GqrmQMv07XR33Ppobms=";
       };
     };
-    ".hammerspoon".source = dotfiles/PaperWM/init.lua;
+    ".hammerspoon/init.lua".source = dotfiles/PaperWM/init.lua;
   };
 
   home.sessionVariables = { };
