@@ -3,13 +3,14 @@
   homebrew = {
     enable = true;
     casks = [
+      "hammerspoon"
       "docker"
       "ghostty"
       "1password"
       "keybase"
       "microsoft-teams"
       "firefox@developer-edition"
-      "aerospace"
+      # "aerospace"
       "microsoft-edge"
     ];
     brews = [
@@ -21,6 +22,6 @@
       # "Okta Verify" = 490179405;
       "Xcode" = 497799835;
     };
-    taps = [ "nikitabobko/tap" ];
+    # taps = [ "nikitabobko/tap" ];
   };
 }

@@ -10,9 +10,9 @@ let
           owner = "mhersson";
           repo = "mpls";
           rev = "main";
-          hash = "sha256-NiNWyR1qmNj5IsFh1gZEBiXBTN7k6R6zkB1HULYKisI=";
+          hash = "sha256-MGrvJOnjNNXU8Z9rqDIacb5awKxf50xYeNkY06U4cUk=";
         };
-      vendorHash = "sha256-xILlYrwcnMWAPACeELwVKGUBIK9QbrUSR03xVmNXsnE=";
+      vendorHash = "sha256-n3DG3sR7HOQPQJW1t1qC94EKkDBgXpdmjUWtLzAE7kY=";
       meta =
         {
           description = "Markdown preview language server";

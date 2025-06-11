@@ -1,5 +1,5 @@
 font-family = "MonaspiceNe Nerd Font Mono"
-window-decoration = false
+# window-decoration = false
 theme = catppuccin-mocha
 background-opacity = 0.9
 background-blur-radius = 15 

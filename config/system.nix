@@ -3,7 +3,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   nix.settings.experimental-features = "nix-command flakes";
-
+  system.primaryUser = "brian";
   system.defaults.dock = {
     autohide = true;
     autohide-delay = 0.0;

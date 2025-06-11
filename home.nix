@@ -12,7 +12,17 @@
 
   home.file = {
     ".config/ghostty".source = dotfiles/ghostty;
-    ".config/aerospace".source = dotfiles/aerospace;
+    # ".config/aerospace".source = dotfiles/aerospace;
+    ".hammerspoon/Spoons/PaperWM.spoon" = {
+      recursive = true;
+      source = pkgs.fetchFromGitHub {
+        owner = "mogenson";
+        repo = "PaperWM.spoon";
+        rev = "release";
+        hash = "sha256-m8gEIeyZPQ43jj2cus+Ks1K9GqrmQMv07XR33Ppobms=";
+      };
+    };
+    ".hammerspoon".source = dotfiles/PaperWM/init.lua;
   };
 
   home.sessionVariables = { };
